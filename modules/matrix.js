@@ -26,11 +26,19 @@ class Matrix {
         this.MAT = _mat;
     }
 
+    identity(rows, cols) {
+        this.MAT.val = new Array(rows).fill(1).map(() => new Array(cols).fill(1));
+        this.MAT.dim = [rows, cols];
+    }
+
+    zeros(rows, cols) {
+        this.MAT.val = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+        this.MAT.dim = [rows, cols];
+    }
 
     toMatrix(X) {
         let mat = {}
-        if (X) {
-
+        if (X != undefined || !isNaN(X)) {
             if (Array.isArray(X)) {
                 if (!this.validateDim(X)) {
                     throw new Error("Number of columns do not match for all rows!");

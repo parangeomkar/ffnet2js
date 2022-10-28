@@ -30,3 +30,20 @@ test("Tests 2x2 matrix transposition", () => {
 
     expect(A.MAT).toEqual(B);
 });
+
+test("Tests creation of 2x3 identity matrix", () => {
+    let A = new Matrix();
+    let B = { val: [[1, 1, 1], [1, 1, 1]], dim: [2, 3] };
+    A.identity(2, 3);
+
+    expect(A.MAT).toEqual(B);
+});
+
+
+test("Tests creation of 3x2 zero matrix", () => {
+    let A = new Matrix();
+    let B = { val: [[0, 0], [0, 0], [0, 0]], dim: [3, 2] };
+    A.zeros(3, 2);
+
+    expect(A.MAT).toEqual(B);
+});
