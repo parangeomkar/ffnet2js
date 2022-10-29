@@ -1,4 +1,5 @@
 const Matrix = require("./matrix");
+const { throwError } = require("./error_handler");
 
 /**
  * 
@@ -6,61 +7,62 @@ const Matrix = require("./matrix");
  * @param {*} B Matrix 2 of any size
  * @returns returns dot product of A and B
  */
-const dot = (A, B) => {
+module.exports.dot = (A, B) => {
     // temp matrix
     let _dotMat = new Matrix();
     let isVectorProduct = 0;
 
     // check if any matrix is null
-    if (A.MAT.dim[0] >= 1 && A.MAT.dim[1] >= 1 && B.MAT.dim[0] >= 1 && B.MAT.dim[1] >= 1) {
+    if (A.dim[0] >= 1 && A.dim[1] >= 1 && B.dim[0] >= 1 && B.dim[1] >= 1) {
 
-        if (A.MAT.dim[0] == 1 && A.MAT.dim[1] == 1) {
+        if (A.dim[0] == 1 && A.dim[1] == 1) {
             // initialize zero matrix of A->rows and A->columns
-            _dotMat.zeros(B.MAT.dim[0], B.MAT.dim[1]);
+            _dotMat.zeros(B.dim[0], B.dim[1]);
 
-        } else if (B.MAT.dim[0] == 1 && B.MAT.dim[1] == 1) {
+        } else if (B.dim[0] == 1 && B.dim[1] == 1) {
             // initialize zero matrix of B->rows and B->columns
-            _dotMat.zeros(A.MAT.dim[0], A.MAT.dim[1]);
+            _dotMat.zeros(A.dim[0], A.dim[1]);
 
             // swap A and B to allow sequence of scaler param first in multiplication
-            let temp = B;
+            let _mat = B;
+
             B = A;
-            A = temp;
+            A = _mat;
 
         } else {
             // vector product
             isVectorProduct = 1;
 
             // initialize zero matrix of A->rows and B->columns
-            _dotMat.zeros(A.MAT.dim[0], B.MAT.dim[1]);
+            _dotMat.zeros(A.dim[0], B.dim[1]);
         }
     } else {
-        throw new Error("Dot product with null matrix is attempted");
+        throwError("Dot product with null matrix is attempted");
     }
 
     // iterate rows of A and multiply with columns of B
-    for (let i = 0; i < A.MAT.dim[0]; i++) {
+    for (let i = 0; i < A.dim[0]; i++) {
         // select row of A matrix
-        let a = A.MAT.val[i];
+        let a = A.val[i];
 
         // iterate columns of B
-        for (let j = 0; j < B.MAT.dim[1]; j++) {
+        for (let j = 0; j < B.dim[1]; j++) {
 
             // iterate rows of B
-            for (let k = 0; k < B.MAT.dim[0]; k++) {
+            for (let k = 0; k < B.dim[0]; k++) {
                 // select column of A matrix
-                let b = B.MAT.val[k];
+                let b = B.val[k];
 
                 if (isVectorProduct) {
-                    _dotMat.MAT.val[i][j] += (a[k] * b[j]);
+                    _dotMat.val[i][j] += (a[k] * b[j]);
                 } else {
-                    _dotMat.MAT.val[k][j] = (a[0] * b[j]);
+                    _dotMat.val[k][j] = (a[0] * b[j]);
                 }
             }
 
             // sum is NaN if dimensions do not match
-            if (isNaN(_dotMat.MAT.val[i][j])) {
-                throw new Error("Matrix dimensions do not match!");
+            if (isNaN(_dotMat.val[i][j])) {
+                throwError("Matrix dimensions do not match!");
             }
         }
     }
@@ -75,56 +77,52 @@ const dot = (A, B) => {
  * @param {*} B Matrix 2 of any size
  * @returns returns sum of A and B
  */
-const add = (A, B) => {
+module.exports.add = (A, B) => {
     // temp matrix
     let _sumMat = new Matrix();
     let isVectorSum = 0;
 
     // check if any matrix is null
-    if (A.MAT.dim[0] >= 1 && A.MAT.dim[1] >= 1 && B.MAT.dim[0] >= 1 && B.MAT.dim[1] >= 1) {
+    if (A.dim[0] >= 1 && A.dim[1] >= 1 && B.dim[0] >= 1 && B.dim[1] >= 1) {
 
-        if (A.MAT.dim[0] == 1 && A.MAT.dim[1] == 1) {
+        if (A.dim[0] == 1 && A.dim[1] == 1) {
             // initialize zero matrix of A->rows and A->columns
-            _sumMat.zeros(B.MAT.dim[0], B.MAT.dim[1]);
+            _sumMat.zeros(B.dim[0], B.dim[1]);
 
-        } else if (B.MAT.dim[0] == 1 && B.MAT.dim[1] == 1) {
+        } else if (B.dim[0] == 1 && B.dim[1] == 1) {
             // initialize zero matrix of B->rows and B->columns
-            _sumMat.zeros(A.MAT.dim[0], A.MAT.dim[1]);
+            _sumMat.zeros(A.dim[0], A.dim[1]);
 
             // swap A and B to allow sequence of scaler param first in multiplication
-            let temp = B;
+            let _mat = B;
             B = A;
-            A = temp;
+            A = _mat;
 
         } else {
             // vector product
             isVectorSum = 1;
 
             // initialize zero matrix of A->rows and B->columns
-            _sumMat.zeros(A.MAT.dim[0], B.MAT.dim[1]);
+            _sumMat.zeros(A.dim[0], B.dim[1]);
         }
     } else {
-        throw new Error("Dot product with null matrix is attempted");
+        throwError("Dot product with null matrix is attempted");
     }
 
     // iterate rows of A and multiply with columns of B
-    for (let i = 0; i < B.MAT.dim[0]; i++) {
-        for (let j = 0; j < B.MAT.dim[1]; j++) {
+    for (let i = 0; i < B.dim[0]; i++) {
+        for (let j = 0; j < B.dim[1]; j++) {
             if (isVectorSum) {
-                _sumMat.MAT.val[i][j] = A.MAT.val[i][j] + B.MAT.val[i][j];
+                _sumMat.val[i][j] = A.val[i][j] + B.val[i][j];
             } else {
-                _sumMat.MAT.val[i][j] = A.MAT.val[0][0] + B.MAT.val[i][j];
+                _sumMat.val[i][j] = A.val[0][0] + B.val[i][j];
             }
 
             // sum is NaN if dimensions do not match
-            if (isNaN(_sumMat.MAT.val[i][j])) {
-                throw new Error("Matrix dimensions do not match!");
+            if (isNaN(_sumMat.val[i][j])) {
+                throwError("Matrix dimensions do not match!");
             }
         }
     }
     return _sumMat;
-}
-module.exports = {
-    dot,
-    add
 }
