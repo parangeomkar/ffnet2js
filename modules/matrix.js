@@ -40,18 +40,29 @@ class Matrix {
      * 
      * @param {*} rows number of rows
      * @param {*} cols number of columns
-     * @brief sets MAT property 
+     * @brief sets MAT property as an identity matrix
      */
     identity(rows, cols) {
         this.val = new Array(rows).fill(1).map(() => new Array(cols).fill(1));
         this.dim = [rows, cols];
     }
 
+    /**
+     * 
+     * @param {*} rows number of rows
+     * @param {*} cols number of columns
+     * @brief sets MAT property as a zero matrix
+     */
     zeros(rows, cols) {
         this.val = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
         this.dim = [rows, cols];
     }
 
+    /**
+     * 
+     * @param {*} X Array of matrix elements
+     * @returns matrix data structure
+     */
     toMatrix(X) {
         let _mat = {}
         if (X != undefined || !isNaN(X)) {
@@ -82,6 +93,11 @@ class Matrix {
         return _mat;
     }
 
+    /**
+     * 
+     * @param {*} X Array of matrix elements
+     * @returns true if the number of elements in each row is same
+     */
     validateDim(X) {
         let numElem = null;
 
