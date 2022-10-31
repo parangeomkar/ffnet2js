@@ -34,6 +34,7 @@ class Matrix {
 
         this.val = _mat;
         this.dim = [this.dim[1], this.dim[0]];
+        return this;
     }
 
     /**
