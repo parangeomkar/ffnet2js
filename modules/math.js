@@ -33,11 +33,18 @@ module.exports.dot = (A, B) => {
             // vector product
             isVectorProduct = 1;
 
-            // initialize zero matrix of A->rows and B->columns
-            _dotMat.zeros(A.dim[0], B.dim[1]);
+
+            // dimensions do not match if columns of first matrix do not match rows of second matrix,
+            if (A.dim[1] != B.dim[0]) {
+                throwError("Dot product with invalid matrix dimensions is attempted!");
+            } else {
+                // initialize zero matrix of A->rows and B->columns
+                _dotMat.zeros(A.dim[0], B.dim[1]);
+            }
+
         }
     } else {
-        throwError("Dot product with null matrix is attempted");
+        throwError("Dot product with null matrix is attempted!");
     }
 
     // iterate rows of A and multiply with columns of B
@@ -60,15 +67,10 @@ module.exports.dot = (A, B) => {
                 }
             }
 
-            // sum is NaN if dimensions do not match
-            if (isNaN(_dotMat.val[i][j])) {
-                throwError("Matrix dimensions do not match!");
-            }
         }
     }
     return _dotMat;
 }
-
 
 
 /**
@@ -99,14 +101,19 @@ module.exports.add = (A, B) => {
             A = _mat;
 
         } else {
-            // vector product
-            isVectorSum = 1;
+            // dimensions do not match if columns of first matrix do not match rows of second matrix,
+            if (A.dim[0] != B.dim[0] && A.dim[1] != B.dim[1]) {
+                throwError("Summation with invalid matrix dimensions is attempted!");
+            } else {
+                // vector product
+                isVectorSum = 1;
 
-            // initialize zero matrix of A->rows and B->columns
-            _sumMat.zeros(A.dim[0], B.dim[1]);
+                // initialize zero matrix of A->rows and B->columns
+                _sumMat.zeros(A.dim[0], B.dim[1]);
+            }
         }
     } else {
-        throwError("Dot product with null matrix is attempted");
+        throwError("Summation with null matrix is attempted!");
     }
 
     // iterate rows of A and multiply with columns of B
@@ -116,11 +123,6 @@ module.exports.add = (A, B) => {
                 _sumMat.val[i][j] = A.val[i][j] + B.val[i][j];
             } else {
                 _sumMat.val[i][j] = A.val[0][0] + B.val[i][j];
-            }
-
-            // sum is NaN if dimensions do not match
-            if (isNaN(_sumMat.val[i][j])) {
-                throwError("Matrix dimensions do not match!");
             }
         }
     }
