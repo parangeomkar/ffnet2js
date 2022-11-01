@@ -1,2 +1,2 @@
-# ann-ga-quantization
-Application of Genetic Algorithm for quantization of ANN.
+# Matlab trained neural network for web
+ffnet2js converts Matlab feed-forward neural network into a JavaScript equivalent.
