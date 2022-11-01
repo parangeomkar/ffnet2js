@@ -116,6 +116,22 @@ test("Tests dot product of 3x3 and 3x2 arrays", () => {
 
 
 
+test("Tests dot product of 3x3 and null matrix", () => {
+    let A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
+        B = new Matrix();
+
+    expect(() => dot(A, B)).toThrow("Dot product with null matrix is attempted!");
+});
+
+
+
+test("Tests dot product of 3x3 and 2x2 matrix", () => {
+    let A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
+        B = new Matrix([[1, 2], [4, 5]]);
+
+    expect(() => dot(A, B)).toThrow("Dot product with invalid matrix dimensions is attempted!");
+});
+
 
 
 
@@ -232,8 +248,19 @@ test("Tests addition of 1x3 and 1x2 arrays", () => {
     expect(D).toEqual(C);
 });
 
-test("Tests get function", () => {
-    let A = new Matrix([[1, 2, 3], [5, 6, 7]]);
 
-    expect(A.get(0, 2) + A.get(1, 0)).toEqual(8);
+test("Tests addition of 1x3 and null matrix", () => {
+    let A = new Matrix([[1, 2, 3]]),
+        B = new Matrix();
+
+    expect(() => add(A, B)).toThrow("Summation with null matrix is attempted!");
 });
+
+
+test("Tests addition of 1x3 and 3x1 matrix", () => {
+    let A = new Matrix([[1, 2, 3]]),
+        B = new Matrix([[1], [2], [3]]);
+
+    expect(() => add(A, B)).toThrow("Summation with invalid matrix dimensions is attempted!");
+});
+

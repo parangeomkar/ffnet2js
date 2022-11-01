@@ -1,3 +1,5 @@
+const { throwError } = require("./error_handler");
+
 class Matrix {
     constructor(X) {
         let _mat = this.toMatrix(X);

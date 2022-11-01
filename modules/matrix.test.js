@@ -47,3 +47,16 @@ test("Tests creation of 3x2 zero matrix", () => {
 
     expect(A).toEqual(B);
 });
+
+
+test("Tests get function", () => {
+    let A = new Matrix([[1, 2, 3], [5, 6, 7]]);
+
+    expect(A.get(0, 2) + A.get(1, 0)).toEqual(8);
+});
+
+
+test("Tests addition of 1x3 and 3x1 matrix", () => {
+    expect(() => new Matrix([[1, 2, 3], [4, 5]])).toThrow("Number of columns do not match for all rows!");
+});
+
