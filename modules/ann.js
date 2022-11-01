@@ -26,6 +26,19 @@ class ANN {
     /**
      * 
      * @param {*} x a row matrix  
+     * @returns a matrix with hyperbolic tangent activated values
+     */
+    actTanh(x) {
+        let actOut = new Array(x.dim[1]);
+        for (let i = 0; i < actOut.length; i++) {
+            actOut[i] = (2 / (1 + Math.exp(-2 * x.get(0, i)))) - 1;
+        }
+        return new Matrix(actOut);
+    }
+
+    /**
+     * 
+     * @param {*} x a row matrix  
      * @returns same matrix
      */
     actLinear(x) {
@@ -52,22 +65,35 @@ class ANN {
      * @returns returns function corresponding actFun. Default is set to linear
      */
     getActivationFun(actFun) {
+        let activationFn = this.actLinear;
+
         switch (actFun) {
-            case "sigmoid":
-                return this.actSigmoid;
-                break;
-            case "linear":
-                return this.actLinear;
+            case "purelin":
+                activationFn = this.actLinear;
                 break;
             case "relu":
-                return this.actReLU;
+                activationFn = this.actReLU;
+                break;
+            case "logsig":
+                activationFn = this.actSigmoid;
+                break;
+            case "tansig":
+                activationFn = this.actTanh;
                 break;
             default:
-                return this.actLinear;
+                activationFn = this.actLinear;
                 break;
         }
+        return activationFn;
     }
 
+    /**
+     * 
+     * @param {*} nNeurons number of neurons in the layer
+     * @param {*} activation type of activation function - linear, sigmoid, relu, tanh
+     * @param {*} weights 
+     * @param {*} biases 
+     */
     addLayer(nNeurons, activation = "linear", weights = undefined, biases = undefined) {
         let actFun = this.getActivationFun(activation);
 
@@ -78,19 +104,16 @@ class ANN {
         this.net.layers.push({
             nNeurons,
             nInputs,
-            actFun,
-            weights,
-            biases
+            actFun
         });
 
         // set weights if provided else initialize as zero
         if (weights) {
-            this.setWeights(weights, this.net.nLayers, nNeurons);
+            this.setWeights(weights, this.net.nLayers);
         } else {
             this.setWeights(
                 new Array(nNeurons).fill(0).map(() => new Array(nInputs).fill(0)),
-                this.net.nLayers,
-                nNeurons);
+                this.net.nLayers);
         }
 
         // set biases if provided else initialize as zero
@@ -101,44 +124,62 @@ class ANN {
         }
     }
 
-    setWeights(weights, nLayer, nNeurons = undefined) {
-        if (nLayer <= 0) {
-            throw new Error("Layer number should be greater than 0!")
+    /**
+     * 
+     * @param {*} weights array of weights
+     * @param {*} nLayer number of layers in the neural network
+     */
+    setWeights(weights, nLayer) {
+        let thisLayer = nLayer - 1;
+        if (!this.net.layers[thisLayer]) {
+            throw new Error("Specified layer does not exist to set weights!")
         }
 
-        if (weights.length == this.net.layers[nLayer - 1].nNeurons) {
-            this.net.layers[nLayer - 1].weights = new Matrix(weights);
-            this.net.layers[nLayer - 1].weights.transpose();
-        } else {
-            throw new Error("Incorrect dimensions for weights!");
-        }
+        // if (weights.length == this.net.layers[nLayer - 1].nInputs) {
+        this.net.layers[nLayer - 1].weights = new Matrix(weights);
+        // } else {
+        //     throw new Error("Incorrect dimensions for weights!");
+        // }
     }
 
 
-    setBiases(biases, nLayer, nNeurons = undefined) {
-        if (nLayer <= 0) {
-            throw new Error("Layer number should be greater than 0!")
+    /**
+     * 
+     * @param {*} biases array of biases
+     * @param {*} nLayer number of layers in the neural network
+     */
+    setBiases(biases, nLayer) {
+        if (!this.net.layers[nLayer - 1]) {
+            throw new Error("Specified layer does not exist to set biases!")
         }
 
-        if (biases.length == this.net.layers[nLayer - 1].nNeurons) {
-            this.net.layers[nLayer - 1].biases = new Matrix(biases);
-        } else {
-            throw new Error("Incorrect dimensions for biases!");
-        }
+        // if (biases.length == this.net.layers[nLayer - 1].nNeurons) {
+        this.net.layers[nLayer - 1].biases = new Matrix(biases);
+        // } else {
+        //     throw new Error("Incorrect dimensions for biases!");
+        // }
     }
 
+    /**
+     * 
+     * @param {*} input array of inputs
+     * @returns matrix of predicted outputs
+     */
     predict(input) {
         let nextIn = new Matrix(input);
 
         // iterate for all neurons
         for (let i = 0; i < this.net.nLayers; i++) {
             let currentLayer = this.net.layers[i];
-            let sumOfProd = dot(nextIn, currentLayer.weights);
 
-            sumOfProd = add(sumOfProd, currentLayer.biases);
+            let sumOfProd = dot(currentLayer.weights, nextIn.transpose());
+            sumOfProd = add(sumOfProd.transpose(), currentLayer.biases);
+
             nextIn = currentLayer.actFun(sumOfProd);
         }
+        return nextIn;
     }
 }
+
 
 module.exports = ANN;
