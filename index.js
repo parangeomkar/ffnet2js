@@ -1,7 +1,22 @@
-const { dot } = require("./modules/math.js");
-const Matrix = require("./modules//matrix.js");
+const ANN = require("./src/ann");
+const fs = require("fs");
+const path = require("path");
 
-let A = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
-let B = new Matrix([[5, 6], [7, 8], [12, 3]]);
+// import matlab JSON exported feedforwardnet
+const ffnet = require("./data/multilayernet.json");
 
-console.log(dot(A, B).MAT)
+// create an instance of neural net
+let ann = new ANN(ffnet);
+
+// predict
+let outputs = [];
+for (let i = -10000; i < 10000; i++) {
+    // theta in radians
+    let theta = (i / 1000);
+
+    // predict sin(theta) with ann
+    let predictdOut = ann.predict(theta);
+    outputs.push(predictdOut.get(0, 0));
+}
+
+fs.writeFileSync(path.join(__dirname, "out.json"), JSON.stringify(outputs));

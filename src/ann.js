@@ -2,12 +2,9 @@ const Matrix = require("./matrix");
 const { dot, add } = require("./math");
 
 class ANN {
-    constructor(nInputs) {
-        this.net = {
-            nLayers: 0,
-            nInputs,
-            layers: []
-        };
+    constructor(ffnet) {
+        this.net = {};
+        this.buildNet(ffnet);
     }
 
     /**
@@ -162,11 +159,44 @@ class ANN {
 
     /**
      * 
+     * @param {*} ffnet JSON encoded matlab neural network
+     */
+    buildNet(ffnet) {
+        let WEIGHTS = [...ffnet.IW, ...ffnet.LW];
+        let BIASES = ffnet.b;
+        let idx = 0;
+
+        this.net = {
+            nLayers: 0,
+            nInputs: ffnet.numInputs,
+            layers: [],
+            inputGain: new Matrix(ffnet.inputs[0].processSettings[0].gain),
+            outputGain: new Matrix(ffnet.outputs[ffnet.numLayers - 1].processSettings[0].gain)
+        }
+
+        for (let weight of WEIGHTS) {
+            // Matlab stores weights as diagonal matrix resulting in JSON encoded net object
+            // to have several empty weight arrays which are off-diagonal elements
+            if (weight.length) {
+                // for n hidden neurons with 1 input, weight matrix is a row matrix
+                // following logic converts it to
+                if (!Array.isArray(weight[0]) && ffnet.layers[idx].dimensions != 1) {
+                    weight = weight.map(w => [w]);
+                }
+
+                this.addLayer(ffnet.layers[idx].dimensions, ffnet.layers[idx].transferFcn, weight, BIASES[idx]);
+                idx++;
+            }
+        }
+    }
+
+    /**
+     * 
      * @param {*} input array of inputs
      * @returns matrix of predicted outputs
      */
     predict(input) {
-        let nextIn = new Matrix(input);
+        let nextIn = dot(new Matrix(input), this.net.inputGain);
 
         // iterate for all neurons
         for (let i = 0; i < this.net.nLayers; i++) {
@@ -177,7 +207,7 @@ class ANN {
 
             nextIn = currentLayer.actFun(sumOfProd);
         }
-        return nextIn;
+        return dot(nextIn, this.net.outputGain);
     }
 }
 
