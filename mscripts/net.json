@@ -1,0 +1,699 @@
+{
+    "version": "8",
+    "name": "Feed-Forward Neural Network",
+    "efficiency": {
+        "cacheDelayedInputs": true,
+        "flattenTime": true,
+        "memoryReduction": 1,
+        "flattenedTime": true
+    },
+    "userdata": {
+        "note": "Put your custom network information here."
+    },
+    "numInputs": 1,
+    "numLayers": 4,
+    "numOutputs": 1,
+    "numInputDelays": 0,
+    "numLayerDelays": 0,
+    "numFeedbackDelays": 0,
+    "numWeightElements": 35,
+    "sampleTime": 1,
+    "biasConnect": [
+        true,
+        true,
+        true,
+        true
+    ],
+    "inputConnect": [
+        true,
+        false,
+        false,
+        false
+    ],
+    "layerConnect": [
+        [
+            false,
+            false,
+            false,
+            false
+        ],
+        [
+            true,
+            false,
+            false,
+            false
+        ],
+        [
+            false,
+            true,
+            false,
+            false
+        ],
+        [
+            false,
+            false,
+            true,
+            false
+        ]
+    ],
+    "outputConnect": [
+        false,
+        false,
+        false,
+        true
+    ],
+    "inputs": [
+        {
+            "name": "Input",
+            "feedbackOutput": [],
+            "processFcns": [
+                "mapminmax"
+            ],
+            "processParams": [
+                {
+                    "ymin": -1,
+                    "ymax": 1
+                }
+            ],
+            "processSettings": [
+                {
+                    "name": "mapminmax",
+                    "xrows": 1,
+                    "xmax": 6.2768146928204143,
+                    "xmin": -6.2831853071795862,
+                    "xrange": 12.56,
+                    "yrows": 1,
+                    "ymax": 1,
+                    "ymin": -1,
+                    "yrange": 2,
+                    "gain": 0.15923566878980891,
+                    "xoffset": -6.2831853071795862,
+                    "no_change": false
+                }
+            ],
+            "processedRange": [
+                -1,
+                1
+            ],
+            "processedSize": 1,
+            "range": [
+                -6.2831853071795862,
+                6.2768146928204143
+            ],
+            "size": 1,
+            "userdata": {
+                "note": "Put your custom input information here."
+            },
+            "exampleInput": []
+        }
+    ],
+    "layers": [
+        {
+            "dimensions": 3,
+            "distanceFcn": "",
+            "distanceParam": {},
+            "distances": [],
+            "initFcn": "initnw",
+            "name": "Hidden 1",
+            "netInputFcn": "netsum",
+            "netInputParam": {},
+            "positions": [],
+            "range": [
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ]
+            ],
+            "size": 3,
+            "topologyFcn": "",
+            "transferFcn": "tansig",
+            "transferParam": {},
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "dimensions": 4,
+            "distanceFcn": "",
+            "distanceParam": {},
+            "distances": [],
+            "initFcn": "initnw",
+            "name": "Hidden 2",
+            "netInputFcn": "netsum",
+            "netInputParam": {},
+            "positions": [],
+            "range": [
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ]
+            ],
+            "size": 4,
+            "topologyFcn": "",
+            "transferFcn": "tansig",
+            "transferParam": {},
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "dimensions": 2,
+            "distanceFcn": "",
+            "distanceParam": {},
+            "distances": [],
+            "initFcn": "initnw",
+            "name": "Hidden 3",
+            "netInputFcn": "netsum",
+            "netInputParam": {},
+            "positions": [],
+            "range": [
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ]
+            ],
+            "size": 2,
+            "topologyFcn": "",
+            "transferFcn": "tansig",
+            "transferParam": {},
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "dimensions": 1,
+            "distanceFcn": "",
+            "distanceParam": {},
+            "distances": [],
+            "initFcn": "initnw",
+            "name": "Output",
+            "netInputFcn": "netsum",
+            "netInputParam": {},
+            "positions": [],
+            "range": [
+                null,
+                null
+            ],
+            "size": 1,
+            "topologyFcn": "",
+            "transferFcn": "purelin",
+            "transferParam": {},
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        }
+    ],
+    "biases": [
+        {
+            "initFcn": "",
+            "learn": true,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": 3,
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "initFcn": "",
+            "learn": true,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": 4,
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "initFcn": "",
+            "learn": true,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": 2,
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "initFcn": "",
+            "learn": true,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": 1,
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        }
+    ],
+    "outputs": [
+        [],
+        [],
+        [],
+        {
+            "name": "Output",
+            "feedbackInput": [],
+            "feedbackDelay": 0,
+            "feedbackMode": "none",
+            "processFcns": [
+                "mapminmax"
+            ],
+            "processParams": [
+                {
+                    "ymin": -1,
+                    "ymax": 1
+                }
+            ],
+            "processSettings": [
+                {
+                    "name": "mapminmax",
+                    "xrows": 1,
+                    "xmax": 0.99999968293183461,
+                    "xmin": -0.999997146387718,
+                    "xrange": 1.9999968293195525,
+                    "yrows": 1,
+                    "ymax": 1,
+                    "ymin": -1,
+                    "yrange": 2,
+                    "gain": 1.0000015853427371,
+                    "xoffset": -0.999997146387718,
+                    "no_change": false
+                }
+            ],
+            "processedRange": [
+                -1,
+                1
+            ],
+            "processedSize": 1,
+            "range": [
+                -0.999997146387718,
+                0.99999968293183461
+            ],
+            "size": 1,
+            "userdata": {
+                "note": "Put your custom output information here."
+            },
+            "exampleOutput": []
+        }
+    ],
+    "inputWeights": [
+        {
+            "delays": 0,
+            "initFcn": "",
+            "initSettings": {
+                "range": [
+                    -1,
+                    1
+                ]
+            },
+            "learn": 1,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": [
+                3,
+                1
+            ],
+            "userdata": {
+                "note": "Put your custom weight information here."
+            },
+            "weightFcn": "dotprod",
+            "weightParam": {}
+        },
+        [],
+        [],
+        []
+    ],
+    "layerWeights": [
+        [],
+        {
+            "delays": 0,
+            "initFcn": "",
+            "initSettings": {
+                "range": [
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ]
+                ]
+            },
+            "learn": 1,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": [
+                4,
+                3
+            ],
+            "userdata": {
+                "note": "Put your custom weight information here."
+            },
+            "weightFcn": "dotprod",
+            "weightParam": {}
+        },
+        [],
+        [],
+        [],
+        [],
+        {
+            "delays": 0,
+            "initFcn": "",
+            "initSettings": {
+                "range": [
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ]
+                ]
+            },
+            "learn": 1,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": [
+                2,
+                4
+            ],
+            "userdata": {
+                "note": "Put your custom weight information here."
+            },
+            "weightFcn": "dotprod",
+            "weightParam": {}
+        },
+        [],
+        [],
+        [],
+        [],
+        {
+            "delays": 0,
+            "initFcn": "",
+            "initSettings": {
+                "range": [
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ]
+                ]
+            },
+            "learn": 1,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": [
+                1,
+                2
+            ],
+            "userdata": {
+                "note": "Put your custom weight information here."
+            },
+            "weightFcn": "dotprod",
+            "weightParam": {}
+        },
+        [],
+        [],
+        [],
+        []
+    ],
+    "adaptFcn": "adaptwb",
+    "adaptParam": {},
+    "divideFcn": "dividerand",
+    "divideParam": {
+        "trainRatio": 0.7,
+        "valRatio": 0.15,
+        "testRatio": 0.15
+    },
+    "divideMode": "sample",
+    "initFcn": "initlay",
+    "performFcn": "mse",
+    "performParam": {
+        "regularization": 0,
+        "normalization": "none"
+    },
+    "plotFcns": [
+        "plotperform",
+        "plottrainstate",
+        "ploterrhist",
+        "plotregression"
+    ],
+    "plotParams": [
+        {},
+        {},
+        {
+            "bins": 20
+        },
+        {}
+    ],
+    "derivFcn": "defaultderiv",
+    "trainFcn": "trainlm",
+    "trainParam": {
+        "showWindow": true,
+        "showCommandLine": false,
+        "show": 25,
+        "epochs": 1000,
+        "time": null,
+        "goal": 0,
+        "min_grad": 1E-7,
+        "max_fail": 6,
+        "mu": 0.001,
+        "mu_dec": 0.1,
+        "mu_inc": 10,
+        "mu_max": 1.0E+10
+    },
+    "IW": [
+        [
+            1.7274369736211508,
+            -7.6860978384623477,
+            2.4754522495307514
+        ],
+        [],
+        [],
+        []
+    ],
+    "LW": [
+        [],
+        [
+            [
+                2.2081873072272384,
+                -2.7999777833883144,
+                -0.34005360752205277
+            ],
+            [
+                4.4399468120479435,
+                -6.7335270090980606,
+                0.036524053173748086
+            ],
+            [
+                3.5882260158721837,
+                -0.282695010013249,
+                -2.54039037120614
+            ],
+            [
+                1.2726829651005336,
+                -7.2941343905954925,
+                -4.1689476049577507
+            ]
+        ],
+        [],
+        [],
+        [],
+        [],
+        [
+            [
+                -1.6100640716966639,
+                -1.5381775100556934,
+                -1.8715874364556917,
+                -0.32376682458700645
+            ],
+            [
+                0.68103249571304958,
+                5.3529150725820447,
+                0.98186366207023357,
+                -5.555160484436092
+            ]
+        ],
+        [],
+        [],
+        [],
+        [],
+        [
+            -2.5068477263084925,
+            -4.4079348036950412
+        ],
+        [],
+        [],
+        [],
+        []
+    ],
+    "b": [
+        [
+            -0.31228996409499349,
+            -5.3763116133936,
+            6.9936540116590971
+        ],
+        [
+            -3.8726273041894639,
+            -2.3073572845763621,
+            -1.3812396137853447,
+            -1.3095659365189221
+        ],
+        [
+            2.1117188498386934,
+            1.7754290745402852
+        ],
+        4.5795470917328736
+    ],
+    "revert": {
+        "IW": [
+            [
+                4.1999999999999993,
+                -4.1999999999999993,
+                4.1999999999999993
+            ],
+            [],
+            [],
+            []
+        ],
+        "LW": [
+            [],
+            [
+                [
+                    1.3954446002286041,
+                    0.7861444755996374,
+                    1.5406497806980357
+                ],
+                [
+                    0.52959166068210284,
+                    -1.5524760895259173,
+                    1.4994136120411172
+                ],
+                [
+                    1.4377007516827127,
+                    1.6324556100996677,
+                    -0.45496785079056473
+                ],
+                [
+                    1.5945104217676069,
+                    0.83331547042825194,
+                    -1.3046119565630734
+                ]
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+                [
+                    -0.50347782900654681,
+                    -0.74785525194151348,
+                    -1.3901306529931945,
+                    -0.16315007723666727
+                ],
+                [
+                    1.1703092315876025,
+                    -0.26251337758462118,
+                    0.6740897862646601,
+                    -0.93750977133834723
+                ]
+            ],
+            [],
+            [],
+            [],
+            [],
+            [
+                0.99415571994639351,
+                0.35798488189883182
+            ],
+            [],
+            [],
+            [],
+            []
+        ],
+        "b": [
+            [
+                -4.1999999999999993,
+                0,
+                4.1999999999999993
+            ],
+            [
+                -2.222361472755479,
+                -0.74078715758515967,
+                0.74078715758515967,
+                2.222361472755479
+            ],
+            [
+                1.6648899610038093,
+                1.6648899610038093
+            ],
+            -0.11577018928297189
+        ]
+    },
+    "gradientFcn": "defaultderiv",
+    "gradientParam": {}
+}
