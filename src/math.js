@@ -49,21 +49,17 @@ module.exports.dot = (A, B) => {
 
     // iterate rows of A and multiply with columns of B
     for (let i = 0; i < A.dim[0]; i++) {
-        // select row of A matrix
-        let a = A.val[i];
 
         // iterate columns of B
         for (let j = 0; j < B.dim[1]; j++) {
 
             // iterate rows of B
             for (let k = 0; k < B.dim[0]; k++) {
-                // select column of A matrix
-                let b = B.val[k];
 
                 if (isVectorProduct) {
-                    _dotMat.val[i][j] += (a[k] * b[j]);
+                    _dotMat.val[i][j] += (A.get(i, k) * B.get(k, j));
                 } else {
-                    _dotMat.val[k][j] = (a[0] * b[j]);
+                    _dotMat.val[k][j] = (A.get(i, 0) * B.get(k, j));
                 }
             }
 
@@ -120,9 +116,9 @@ module.exports.add = (A, B) => {
     for (let i = 0; i < B.dim[0]; i++) {
         for (let j = 0; j < B.dim[1]; j++) {
             if (isVectorSum) {
-                _sumMat.val[i][j] = A.val[i][j] + B.val[i][j];
+                _sumMat.val[i][j] = A.get(i, j) + B.get(i, j);
             } else {
-                _sumMat.val[i][j] = A.val[0][0] + B.val[i][j];
+                _sumMat.val[i][j] = A.get(0, 0) + B.get(i, j);
             }
         }
     }
