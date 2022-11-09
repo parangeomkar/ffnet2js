@@ -1,5 +1,4 @@
-const Matrix = require("./matrix");
-const { dot, add } = require("./math");
+const { Matrix, dot, add } = require("vector-math-js");
 
 class ANN {
     constructor(ffnet) {

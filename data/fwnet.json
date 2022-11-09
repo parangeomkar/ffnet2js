@@ -1,0 +1,407 @@
+{
+    "version": "8",
+    "name": "Function Fitting Neural Network",
+    "efficiency": {
+        "cacheDelayedInputs": true,
+        "flattenTime": true,
+        "memoryReduction": 1,
+        "flattenedTime": true
+    },
+    "userdata": {
+        "note": "Put your custom network information here."
+    },
+    "numInputs": 1,
+    "numLayers": 2,
+    "numOutputs": 1,
+    "numInputDelays": 0,
+    "numLayerDelays": 0,
+    "numFeedbackDelays": 0,
+    "numWeightElements": 13,
+    "sampleTime": 1,
+    "biasConnect": [
+        true,
+        true
+    ],
+    "inputConnect": [
+        true,
+        false
+    ],
+    "layerConnect": [
+        [
+            false,
+            false
+        ],
+        [
+            true,
+            false
+        ]
+    ],
+    "outputConnect": [
+        false,
+        true
+    ],
+    "inputs": [
+        {
+            "name": "Input",
+            "feedbackOutput": [],
+            "processFcns": [
+                "mapminmax"
+            ],
+            "processParams": [
+                {
+                    "ymin": -1,
+                    "ymax": 1
+                }
+            ],
+            "processSettings": [
+                {
+                    "name": "mapminmax",
+                    "xrows": 1,
+                    "xmax": 100,
+                    "xmin": -100,
+                    "xrange": 200,
+                    "yrows": 1,
+                    "ymax": 1,
+                    "ymin": -1,
+                    "yrange": 2,
+                    "gain": 0.01,
+                    "xoffset": -100,
+                    "no_change": false
+                }
+            ],
+            "processedRange": [
+                -1,
+                1
+            ],
+            "processedSize": 1,
+            "range": [
+                -100,
+                100
+            ],
+            "size": 1,
+            "userdata": {
+                "note": "Put your custom input information here."
+            },
+            "exampleInput": []
+        }
+    ],
+    "layers": [
+        {
+            "dimensions": 4,
+            "distanceFcn": "",
+            "distanceParam": {},
+            "distances": [],
+            "initFcn": "initnw",
+            "name": "Hidden",
+            "netInputFcn": "netsum",
+            "netInputParam": {},
+            "positions": [],
+            "range": [
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ],
+                [
+                    -1,
+                    1
+                ]
+            ],
+            "size": 4,
+            "topologyFcn": "",
+            "transferFcn": "tansig",
+            "transferParam": {},
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "dimensions": 1,
+            "distanceFcn": "",
+            "distanceParam": {},
+            "distances": [],
+            "initFcn": "initnw",
+            "name": "Output",
+            "netInputFcn": "netsum",
+            "netInputParam": {},
+            "positions": [],
+            "range": [
+                null,
+                null
+            ],
+            "size": 1,
+            "topologyFcn": "",
+            "transferFcn": "purelin",
+            "transferParam": {},
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        }
+    ],
+    "biases": [
+        {
+            "initFcn": "",
+            "learn": true,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": 4,
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        },
+        {
+            "initFcn": "",
+            "learn": true,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": 1,
+            "userdata": {
+                "note": "Put your custom layer information here."
+            }
+        }
+    ],
+    "outputs": [
+        [],
+        {
+            "name": "Output",
+            "feedbackInput": [],
+            "feedbackDelay": 0,
+            "feedbackMode": "none",
+            "processFcns": [
+                "mapminmax"
+            ],
+            "processParams": [
+                {
+                    "ymin": -1,
+                    "ymax": 1
+                }
+            ],
+            "processSettings": [
+                {
+                    "name": "mapminmax",
+                    "xrows": 1,
+                    "xmax": 109.89992473337239,
+                    "xmin": -110.21574378298682,
+                    "xrange": 220.11566851635922,
+                    "yrows": 1,
+                    "ymax": 1,
+                    "ymin": -1,
+                    "yrange": 2,
+                    "gain": 0.0090861319118287018,
+                    "xoffset": -110.21574378298682,
+                    "no_change": false
+                }
+            ],
+            "processedRange": [
+                -1,
+                0.99999999999999978
+            ],
+            "processedSize": 1,
+            "range": [
+                -110.21574378298682,
+                109.89992473337239
+            ],
+            "size": 1,
+            "userdata": {
+                "note": "Put your custom output information here."
+            },
+            "exampleOutput": []
+        }
+    ],
+    "inputWeights": [
+        {
+            "delays": 0,
+            "initFcn": "",
+            "initSettings": {
+                "range": [
+                    -1,
+                    1
+                ]
+            },
+            "learn": 1,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": [
+                4,
+                1
+            ],
+            "userdata": {
+                "note": "Put your custom weight information here."
+            },
+            "weightFcn": "dotprod",
+            "weightParam": {}
+        },
+        []
+    ],
+    "layerWeights": [
+        [],
+        {
+            "delays": 0,
+            "initFcn": "",
+            "initSettings": {
+                "range": [
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ],
+                    [
+                        -1,
+                        1
+                    ]
+                ]
+            },
+            "learn": 1,
+            "learnFcn": "learngdm",
+            "learnParam": {
+                "lr": 0.01,
+                "mc": 0.9
+            },
+            "size": [
+                1,
+                4
+            ],
+            "userdata": {
+                "note": "Put your custom weight information here."
+            },
+            "weightFcn": "dotprod",
+            "weightParam": {}
+        },
+        [],
+        []
+    ],
+    "adaptFcn": "adaptwb",
+    "adaptParam": {},
+    "divideFcn": "dividerand",
+    "divideParam": {
+        "trainRatio": 0.7,
+        "valRatio": 0.15,
+        "testRatio": 0.15
+    },
+    "divideMode": "sample",
+    "initFcn": "initlay",
+    "performFcn": "mse",
+    "performParam": {
+        "regularization": 0,
+        "normalization": "none"
+    },
+    "plotFcns": [
+        "plotperform",
+        "plottrainstate",
+        "ploterrhist",
+        "plotregression",
+        "plotfit"
+    ],
+    "plotParams": [
+        {},
+        {},
+        {
+            "bins": 20
+        },
+        {},
+        {
+            "outputIndex": 1
+        }
+    ],
+    "derivFcn": "defaultderiv",
+    "trainFcn": "trainlm",
+    "trainParam": {
+        "showWindow": true,
+        "showCommandLine": false,
+        "show": 25,
+        "epochs": 1000,
+        "time": null,
+        "goal": 0,
+        "min_grad": 1E-7,
+        "max_fail": 6,
+        "mu": 0.001,
+        "mu_dec": 0.1,
+        "mu_inc": 10,
+        "mu_max": 1.0E+10
+    },
+    "IW": [
+        [
+            30.589390614994635,
+            -1.8102172755800821,
+            0.79125114593781121,
+            -3.5433889041422306
+        ],
+        []
+    ],
+    "LW": [
+        [],
+        [
+            0.032265466566483048,
+            -0.40990106202213766,
+            1.1573315913023459,
+            -11.639704661029219
+        ],
+        [],
+        []
+    ],
+    "b": [
+        [
+            -25.451180593560636,
+            0.54224938429124114,
+            0.92639219931353411,
+            -24.345927744163575
+        ],
+        -12.251579991224627
+    ],
+    "revert": {
+        "IW": [
+            [
+                5.6,
+                -5.6,
+                5.6,
+                5.6
+            ],
+            []
+        ],
+        "LW": [
+            [],
+            [
+                -0.14323928373260775,
+                -0.578415888027735,
+                -0.4692314631914638,
+                0.98636751042532977
+            ],
+            [],
+            []
+        ],
+        "b": [
+            [
+                -5.6,
+                1.8666666666666665,
+                1.8666666666666665,
+                5.6
+            ],
+            -0.038487260986590277
+        ]
+    },
+    "gradientFcn": "defaultderiv",
+    "gradientParam": {}
+}
