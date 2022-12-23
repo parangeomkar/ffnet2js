@@ -1,6 +1,11 @@
 # Matlab trained neural network for web
 ffnet2js converts Matlab feed-forward neural network into a JavaScript equivalent to be deployed on web.
 
+
+#### Comparison of MATLAB and ffnet2js predicted outputs
+![untitled](https://user-images.githubusercontent.com/34441691/209355066-df2cf0ed-5609-41e4-8f47-977acd2cb139.png)
+
+
 ## Run Locally
 
 #### Clone the project
@@ -43,10 +48,4 @@ const ffnetData = require("ffnet.json");
 let ann = new ff2js(ffnetData);
 let x = Math.PI/4;
 const output = ann.predict(x);
-```
-
-
-#### Run 
-```bash
-  npm run start
 ```
