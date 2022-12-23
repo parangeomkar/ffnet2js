@@ -13,12 +13,6 @@ ffnet2js converts Matlab feed-forward neural network into a JavaScript equivalen
   git clone https://github.com/parangeomkar/ffnet2js.git
 ```
 
-#### Go to the project directory
-
-```bash
-  cd ffnet2js
-```
-
 #### Train MATLAB ffnet
 ```bash
 x = -2*pi:0.01:2*pi;
