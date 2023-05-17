@@ -1,4 +1,4 @@
-const { Matrix, dot, add } = require("vector-math-js");
+const { Matrix, dot, add } = require("matrix-math-js");
 
 test("Tests creation of ANN instance", () => {
     let A = new ANN(2),
